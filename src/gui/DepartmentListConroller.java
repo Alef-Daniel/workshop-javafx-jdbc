@@ -14,6 +14,7 @@ import model.entities.Department;
 import model.services.DepartmentService;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -59,7 +60,7 @@ public class DepartmentListConroller implements Initializable {
         this.service = service;
     }
 
-    public void updateTableView(){
+    public void updateTableView() throws SQLException {
         if(service == null){
             throw new IllegalStateException("Service was Null");
         }

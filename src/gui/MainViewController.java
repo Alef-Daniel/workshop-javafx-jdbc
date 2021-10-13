@@ -16,6 +16,7 @@ import model.services.DepartmentService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
@@ -39,7 +40,12 @@ public class MainViewController implements Initializable {
         loadView("/gui/DepartmentList.fxml",
                 (DepartmentListConroller controller) -> {
                     controller.setDepartmentService(new DepartmentService());
-                    controller.updateTableView();});
+                    try {
+                        controller.updateTableView();
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                });
 
     }
 
