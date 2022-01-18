@@ -1,6 +1,7 @@
 package gui;
 
 import application.Main;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Utils;
 import javafx.collections.FXCollections;
@@ -27,7 +28,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DepartmentListConroller implements Initializable {
+public class DepartmentListConroller implements Initializable, DataChangeListener {
 
 
     @FXML
@@ -89,6 +90,7 @@ public class DepartmentListConroller implements Initializable {
             DepartmentFormController controller = loader.getController();
             controller.setDepartment(obj);
             controller.setDepartmentService(new DepartmentService());
+            controller.subscribeDataChangeListener(this);
             controller.updateFormData();
 
             Stage dialogStage = new Stage();
@@ -102,5 +104,10 @@ public class DepartmentListConroller implements Initializable {
         }catch (IOException e){
             Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+
+    @Override
+    public void onDataChanged() throws SQLException {
+        updateTableView();
     }
 }
