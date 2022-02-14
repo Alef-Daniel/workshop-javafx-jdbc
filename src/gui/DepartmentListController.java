@@ -28,7 +28,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DepartmentListConroller implements Initializable, DataChangeListener {
+public class DepartmentListController implements Initializable, DataChangeListener {
 
 
     @FXML
