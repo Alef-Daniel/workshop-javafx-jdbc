@@ -12,6 +12,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import model.services.DepartmentService;
+import model.services.SellerService;
 
 
 import java.io.IOException;
@@ -33,7 +34,15 @@ public class MainViewController implements Initializable {
 
 
    public void onMenuItemSellerAction(){
-       System.out.println("onMenuItemSellerAction");
+       loadView("/gui/SellerList.fxml",
+               (SellerListController controller) -> {
+                   controller.setSellerService(new SellerService());
+                   try {
+                       controller.updateTableView();
+                   } catch (SQLException throwables) {
+                       throwables.printStackTrace();
+                   }
+               });
    }
 
     public void onMenuItemDepartmentAction(){
